@@ -2,9 +2,9 @@ site:
   id: default
   base_url: "http://127.0.0.1:8080/" # must end with /
   media_base_url: "http://127.0.0.1:8080/media/" # local fallback; CI injects the deploy media URL automatically
-  title: "Антон Ложкин"
-  description: "Личный портал"
-  default_og_image: "/assets/main.webp"
+  title: "Ольга Кузнецова"
+  description: "Профессиональная ясность и внутренняя опора"
+  default_og_image: "/assets/olgakuznetsova.jpg"
 runtime:
   # auto keeps local builds on 127.0.0.1 and lets CI inject production URLs.
   mode: "auto"

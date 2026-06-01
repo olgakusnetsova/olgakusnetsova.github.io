@@ -1,21 +1,18 @@
-# Личный портал - Полный LLM-индекс
+# Сайт Ольги Кузнецовой - Полный LLM-индекс
 
 ## Назначение
-Личные заметки о системном мышлении, автоматизации, SEO и AI-процессах.
+Материалы о профессиональной ясности, внутренней опоре, профориентации и личной трансформации.
 
 ## Источник истины
 - Markdown-контент в `content/`
 - Правила в `rules.yaml`
 
 ## Маршруты
-- Главная: https://cookiespooky.github.io/
-- Хаб Notepub: https://cookiespooky.github.io/notepub-hub
-- Хаб Self Tracker: https://cookiespooky.github.io/self-tracker-hub
-- Кейс: учебный центр: https://cookiespooky.github.io/edu-center-case
-- Статья: RFM-анализ: https://cookiespooky.github.io/rfm-analysis-promo/
-- Страница поиска: https://cookiespooky.github.io/search/
+- Главная: https://olgakusnetsova.github.io/
+- Страница поиска: https://olgakusnetsova.github.io/search/
+- Footer: https://olgakusnetsova.github.io/footer/
 
 ## Обнаружение и индексация
-- Карта сайта: https://cookiespooky.github.io/sitemap.xml
-- Индекс поиска JSON: https://cookiespooky.github.io/search.json
-- LLM-индекс: https://cookiespooky.github.io/llms.txt
+- Карта сайта: https://olgakusnetsova.github.io/sitemap.xml
+- Индекс поиска JSON: https://olgakusnetsova.github.io/search.json
+- LLM-индекс: https://olgakusnetsova.github.io/llms.txt

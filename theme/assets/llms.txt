@@ -1,14 +1,14 @@
-# Личный портал
+# Сайт Ольги Кузнецовой
 
-Это личный блог и портал знаний на базе Notepub.
+Это персональный сайт Ольги Кузнецовой на базе Notepub.
 
 Базовый URL:
-- https://cookiespooky.github.io/
+- https://olgakusnetsova.github.io/
 
 Предпочтительный машиночитаемый источник:
-- https://cookiespooky.github.io/llms-full.txt
+- https://olgakusnetsova.github.io/llms-full.txt
 
 Ключевые точки входа:
-- Главная: https://cookiespooky.github.io/
-- Индекс поиска: https://cookiespooky.github.io/search.json
-- Карта сайта: https://cookiespooky.github.io/sitemap.xml
+- Главная: https://olgakusnetsova.github.io/
+- Индекс поиска: https://olgakusnetsova.github.io/search.json
+- Карта сайта: https://olgakusnetsova.github.io/sitemap.xml

@@ -1,14 +1,14 @@
 ---
-site_title: "Антон Ложкин"
-site_description: "Личный портал"
+site_title: "Ольга Кузнецова"
+site_description: "Профессиональная ясность и внутренняя опора"
 site_language: ru
-site_default_og_image: "/assets/main.webp"
-brand_name: "Антон Ложкин"
-brand_logo: /media/notepub.svg
-theme_accent: "#0a0a0a"
-theme_link: "#0a0a0a"
-theme_font: system
-theme_heading_font: system
+site_default_og_image: "/assets/olgakuznetsova.jpg"
+brand_name: "Ольга Кузнецова"
+brand_logo: /assets/olgakuznetsova.jpg
+theme_accent: "#6F8F72"
+theme_link: "#6F8F72"
+theme_font: "Lora"
+theme_heading_font: "Lora"
 theme_radius: 14
 ---
 

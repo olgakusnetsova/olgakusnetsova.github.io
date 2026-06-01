@@ -1,7 +1,7 @@
 {
-  "name": "Наблюдения, автоматизация, смысл",
-  "short_name": "Наблюдения, автоматизация, смысл",
-  "description": "Разбираюсь в том, как все устроено, и делаю соответствующие выводы",
+  "name": "Ольга Кузнецова",
+  "short_name": "Ольга Кузнецова",
+  "description": "Профессиональная ясность и внутренняя опора",
   "lang": "ru",
   "id": "/",
   "start_url": "/",
@@ -11,14 +11,9 @@
   "theme_color": "#ffffff",
   "icons": [
     {
-      "src": "/assets/android-chrome-192x192.png",
-      "sizes": "192x192",
-      "type": "image/png"
-    },
-    {
-      "src": "/assets/android-chrome-512x512.png",
+      "src": "/assets/olgakuznetsova.jpg",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/jpeg"
     }
   ]
 }

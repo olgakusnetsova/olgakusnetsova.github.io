@@ -476,8 +476,8 @@
     function updateCreatorLink(sourceText) {
       if (!creatorLink) return;
       var text = (sourceText || textArea.value || "").trim();
-      var message = text ? ("Привет, Антон! " + text) : "Привет, Антон!";
-      creatorLink.href = "https://t.me/cookiespooky?text=" + encodeURIComponent(message);
+      var message = text ? ("Привет, Ольга! " + text) : "Привет, Ольга!";
+      creatorLink.href = "https://t.me/OlgaKusnetsova?text=" + encodeURIComponent(message);
     }
 
     function autoGrowTextArea() {

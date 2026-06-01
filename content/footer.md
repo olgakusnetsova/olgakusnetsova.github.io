@@ -1,16 +1,13 @@
 ---
 type: footer
-slug: footer
-title: Футер
-description: Единый футер сайта
+title: "Контакты"
+slug: "footer"
+description: "Контакты Ольги Кузнецовой"
+draft: false
 noindex: true
 ---
 
-## Call to Action
-**Есть идея, задача или хаотичный процесс?**
-Разберемся и соберем работающую систему. [Написать в Telegram](https://t.me/cookiespooky)
+## Контакты
 
-## Контакты и ссылки
-- [Telegram-канал](https://t.me/thefoundersway)
-- [VC.ru](https://vc.ru/id1138692)
-- [GitHub](https://github.com/cookiespooky)
+- Telegram: [@OlgaKusnetsova](https://t.me/OlgaKusnetsova)
+- Канал: [@put_serdca_OlgaKuznetsova](https://t.me/put_serdca_OlgaKuznetsova)
