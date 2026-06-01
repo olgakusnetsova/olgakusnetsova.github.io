@@ -1,0 +1,351 @@
+@import url("https://fonts.googleapis.com/css2?family=Caveat:wght@500&family=Jost:wght@400;900&display=swap");
+
+:root {
+  --bg-color: #fff;
+  --dog-color: #000;
+  --dog-scale: 1;
+
+  --frame-max: 720px;
+  --frame-size-mobile: 100vw;
+  --frame-size-desktop: min(100vh, 100vw);
+
+  --frame-padding-top: 6;
+  --frame-padding-bottom: 6;
+
+  --body-thickness: 8.7;
+
+  --wag-speed: 0.45s;
+  --wag-angle: 10deg;
+  --step-speed: 0.34s;
+  --step-angle: 11deg;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+}
+
+body {
+  background: var(--bg-color);
+}
+
+.page {
+  display: grid;
+  place-items: center;
+}
+
+.scene {
+  width: 100%;
+  display: grid;
+}
+
+.frame {
+  --frame-size: var(--frame-size-mobile);
+  --u: calc(var(--frame-size) / 100);
+  position: relative;
+  width: var(--frame-size);
+  height: var(--frame-size);
+  overflow: hidden;
+  background: var(--bg-color);
+  border: 1px solid rgba(0, 0, 0, 0.18);
+}
+
+@media (min-width: 768px) {
+  .frame {
+    --frame-size: var(--frame-size-desktop);
+  }
+}
+
+.guides {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+}
+
+.body-stripes {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.track-text {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 6;
+  color: #fff;
+  font-family: "Jost", "Arial Black", Arial, sans-serif;
+  font-weight: 900;
+  font-size: calc(5.2 * var(--u));
+  letter-spacing: calc(0.22 * var(--u));
+  text-transform: uppercase;
+  line-height: 1;
+  white-space: nowrap;
+  pointer-events: none;
+  user-select: none;
+}
+
+.welcome-text {
+  position: absolute;
+  left: 50%;
+  top: 24%;
+  transform: translate(-50%, -50%) rotate(-1.4deg);
+  z-index: 8;
+  display: grid;
+  justify-items: center;
+  gap: calc(0.6 * var(--u));
+  pointer-events: none;
+  user-select: none;
+}
+
+.welcome-main {
+  display: flex;
+  gap: calc(0.35 * var(--u));
+}
+
+.welcome-letter {
+  --glow: #00e5ff;
+  position: relative;
+  display: inline-block;
+  color: #000;
+  font-family: "Jost", "Arial Black", Arial, sans-serif;
+  font-weight: 900;
+  font-size: calc(9.2 * var(--u));
+  line-height: 0.9;
+  -webkit-text-stroke: calc(0.42 * var(--u)) #111;
+  text-shadow:
+    0 0 calc(0.65 * var(--u)) #fff,
+    0 0 calc(1.4 * var(--u)) var(--glow),
+    0 0 calc(2.8 * var(--u)) var(--glow),
+    0 0 calc(4.2 * var(--u)) color-mix(in srgb, var(--glow) 82%, white 18%),
+    calc(0.25 * var(--u)) calc(0.25 * var(--u)) 0 #111;
+}
+
+.welcome-letter.is-flickering {
+  animation: neon-flicker 0.2s steps(2, end) infinite;
+}
+
+.welcome-letter:nth-child(1) {
+  --glow: #ff2da2;
+  transform: rotate(-8deg) translateY(calc(-0.25 * var(--u)));
+}
+
+.welcome-letter:nth-child(2) {
+  --glow: #30d8ff;
+  transform: rotate(-3deg);
+}
+
+.welcome-letter:nth-child(3) {
+  --glow: #7bff3a;
+  transform: rotate(2deg) translateY(calc(-0.12 * var(--u)));
+}
+
+.welcome-letter:nth-child(4) {
+  --glow: #ffd43a;
+  transform: rotate(-5deg) translateY(calc(0.2 * var(--u)));
+}
+
+.welcome-letter:nth-child(5) {
+  --glow: #9c5bff;
+  transform: rotate(3deg);
+}
+
+.welcome-letter:nth-child(6) {
+  --glow: #ff6b35;
+  transform: rotate(-2deg) translateY(calc(-0.2 * var(--u)));
+}
+
+.welcome-letter:nth-child(7) {
+  --glow: #00f5a0;
+  transform: rotate(6deg) translateY(calc(0.08 * var(--u)));
+}
+
+.welcome-to {
+  position: absolute;
+  left: 50%;
+  top: 36%;
+  transform: translate(-50%, -36%);
+  color: #111;
+  font-family: "Jost", Arial, sans-serif;
+  font-weight: 400;
+  font-size: calc(3.4 * var(--u));
+  letter-spacing: calc(0.08 * var(--u));
+  line-height: 1;
+  text-transform: lowercase;
+}
+
+.signature-text {
+  position: absolute;
+  left: 50%;
+  top: 75%;
+  transform: translate(-50%, -75%);
+  z-index: 7;
+  color: rgba(0, 0, 0, 0.78);
+  font-family: "Caveat", "Segoe Script", cursive;
+  font-weight: 500;
+  font-size: calc(4.2 * var(--u));
+  letter-spacing: calc(0.05 * var(--u));
+  line-height: 1;
+  white-space: nowrap;
+  pointer-events: none;
+  user-select: none;
+}
+
+.stripe {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: calc(var(--body-thickness) * var(--dog-scale) * var(--u));
+  border-radius: 0px;
+  background: var(--dog-color);
+  opacity: 0;
+  will-change: left, right, opacity;
+}
+
+.stripe.on {
+  opacity: 1;
+}
+
+.stripe.off {
+  opacity: 0;
+}
+
+.runner {
+  --x: -16;
+  --y: 84;
+  position: absolute;
+  left: calc(var(--x) * 1%);
+  top: calc(var(--y) * 1%);
+  will-change: left, top, opacity;
+}
+
+.runner.is-hidden {
+  opacity: 0;
+}
+
+.head-runner {
+  width: calc(32 * var(--dog-scale) * var(--u));
+  height: calc(24 * var(--dog-scale) * var(--u));
+  z-index: 5;
+}
+
+.rear-runner {
+  width: calc(24 * var(--dog-scale) * var(--u));
+  height: calc(16 * var(--dog-scale) * var(--u));
+  z-index: 4;
+}
+
+.dog-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.front-leg,
+.back-leg {
+  transform-box: fill-box;
+  transform-origin: top center;
+  animation: step var(--step-speed) ease-in-out infinite alternate;
+}
+
+.front-leg.leg-b,
+.back-leg.leg-b {
+  animation-delay: calc(var(--step-speed) / -2);
+}
+
+.tail-shape {
+  transform-box: fill-box;
+  transform-origin: right center;
+  animation: wag var(--wag-speed) ease-in-out infinite alternate;
+}
+
+.runner.legs-paused .front-leg,
+.runner.legs-paused .back-leg,
+.runner.legs-paused .tail-shape {
+  animation-play-state: paused;
+}
+
+@keyframes step {
+  0% {
+    transform: rotate(calc(var(--step-angle) * -1));
+  }
+  100% {
+    transform: rotate(var(--step-angle));
+  }
+}
+
+@keyframes wag {
+  0% {
+    transform: rotate(calc(var(--wag-angle) * -1));
+  }
+  100% {
+    transform: rotate(var(--wag-angle));
+  }
+}
+
+@keyframes neon-flicker {
+  0% {
+    opacity: 1;
+    text-shadow:
+      0 0 calc(0.65 * var(--u)) #fff,
+      0 0 calc(1.4 * var(--u)) var(--glow),
+      0 0 calc(2.8 * var(--u)) var(--glow),
+      0 0 calc(4.2 * var(--u)) color-mix(in srgb, var(--glow) 82%, white 18%),
+      calc(0.25 * var(--u)) calc(0.25 * var(--u)) 0 #111;
+  }
+  35% {
+    opacity: 0.45;
+    text-shadow:
+      0 0 calc(0.25 * var(--u)) #fff,
+      0 0 calc(0.45 * var(--u)) var(--glow),
+      0 0 calc(0.7 * var(--u)) var(--glow),
+      calc(0.25 * var(--u)) calc(0.25 * var(--u)) 0 #111;
+  }
+  60% {
+    opacity: 0.12;
+    text-shadow: calc(0.25 * var(--u)) calc(0.25 * var(--u)) 0 #111;
+  }
+  100% {
+    opacity: 1;
+    text-shadow:
+      0 0 calc(0.65 * var(--u)) #fff,
+      0 0 calc(1.4 * var(--u)) var(--glow),
+      0 0 calc(2.8 * var(--u)) var(--glow),
+      0 0 calc(4.2 * var(--u)) color-mix(in srgb, var(--glow) 82%, white 18%),
+      calc(0.25 * var(--u)) calc(0.25 * var(--u)) 0 #111;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .front-leg,
+  .back-leg,
+  .tail-shape,
+  .welcome-letter.is-flickering {
+    animation: none !important;
+  }
+}
+
+html.force-motion .front-leg,
+html.force-motion .back-leg {
+  animation: step var(--step-speed) ease-in-out infinite alternate !important;
+}
+
+html.force-motion .front-leg.leg-b,
+html.force-motion .back-leg.leg-b {
+  animation-delay: calc(var(--step-speed) / -2) !important;
+}
+
+html.force-motion .tail-shape {
+  animation: wag var(--wag-speed) ease-in-out infinite alternate !important;
+}
+
+html.force-motion .welcome-letter.is-flickering {
+  animation: neon-flicker 0.2s steps(2, end) infinite !important;
+}

@@ -1,0 +1,14 @@
+# Личный портал
+
+Это личный блог и портал знаний на базе Notepub.
+
+Базовый URL:
+- https://cookiespooky.github.io/
+
+Предпочтительный машиночитаемый источник:
+- https://cookiespooky.github.io/llms-full.txt
+
+Ключевые точки входа:
+- Главная: https://cookiespooky.github.io/
+- Индекс поиска: https://cookiespooky.github.io/search.json
+- Карта сайта: https://cookiespooky.github.io/sitemap.xml

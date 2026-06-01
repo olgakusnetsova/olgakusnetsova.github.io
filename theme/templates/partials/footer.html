@@ -1,0 +1,59 @@
+<footer class="site-footer">
+  <div class="container">
+    <hr class="footer-separator" />
+  </div>
+  <div class="container footer-inner">
+    <div class="prose footer-prose" data-site-footer>
+      <p class="muted">Загрузка футера...</p>
+    </div>
+  </div>
+  <script>
+    (function() {
+      var target = document.querySelector('[data-site-footer]');
+      if (!target) return;
+      function markExternalLinks(scope) {
+        var links = scope.querySelectorAll('a[href]');
+        if (!links.length) return;
+        links.forEach(function (link) {
+          var href = link.getAttribute('href') || '';
+          if (!href || href.indexOf('#') === 0 || href.indexOf('mailto:') === 0 || href.indexOf('tel:') === 0) {
+            return;
+          }
+          var url;
+          try {
+            url = new URL(href, window.location.href);
+          } catch (e) {
+            return;
+          }
+          var isHttp = /^https?:$/i.test(url.protocol);
+          if (isHttp && url.origin !== window.location.origin) {
+            link.classList.add('is-external');
+          } else {
+            link.classList.remove('is-external');
+          }
+        });
+      }
+      var footerURL = '{{ .BaseURL }}/footer';
+      fetch(footerURL, { credentials: 'same-origin' })
+        .then(function(resp) { return resp.ok ? resp.text() : ''; })
+        .then(function(html) {
+          if (!html) {
+            target.innerHTML = '<p class="muted">Footer page is missing: content/footer.md</p>';
+            return;
+          }
+          var parser = new DOMParser();
+          var doc = parser.parseFromString(html, 'text/html');
+          var source = doc.querySelector('article.page .prose');
+          if (!source) {
+            target.innerHTML = '<p class="muted">Footer content is empty.</p>';
+            return;
+          }
+          target.innerHTML = source.innerHTML;
+          markExternalLinks(target);
+        })
+        .catch(function() {
+          target.innerHTML = '<p class="muted">Footer page is missing: content/footer.md</p>';
+        });
+    })();
+  </script>
+</footer>

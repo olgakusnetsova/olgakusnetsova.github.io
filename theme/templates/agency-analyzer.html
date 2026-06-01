@@ -1,0 +1,113 @@
+<section class="page">
+  <div class="agency-tool" data-agency-analyzer data-endpoint="https://functions.yandexcloud.net/d4ekhrgiv52qh61jqjls">
+    <header class="agency-tool-header">
+      <h1>Опишите свою ситуацию, которую вы хотите решить</h1>
+      <p class="agency-tool-subtitle">Получите перевод на объективный язык.</p>
+    </header>
+
+    <form class="agency-form" data-aa-form>
+      <div class="agency-input-shell" data-aa-input-shell>
+        <textarea
+          class="agency-textarea"
+          data-aa-text
+          maxlength="500"
+          placeholder="Например: Я хочу изменить свою жизнь, но не знаю, с чего начать"
+          required
+        ></textarea>
+
+        <div class="agency-submit-inline">
+          <div class="agency-counter"><span data-aa-char-count>0</span>/500</div>
+          <div class="agency-actions" data-aa-submit-row>
+            <button type="submit" class="agency-primary-btn is-icon" aria-label="Получить перевод" title="Получить перевод">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up-circle-fill" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+                <path d="M16 8A8 8 0 1 0 0 8a8 8 0 0 0 16 0m-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707z"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+
+    <section class="agency-output" data-aa-output hidden>
+      <div class="agency-loader" data-aa-loader>
+        <span class="agency-loader-spinner" aria-hidden="true"></span>
+        <p>Анализирую формулировку и готовлю перевод...</p>
+      </div>
+
+      <article class="agency-result" data-aa-result hidden>
+        <p data-aa-source-text></p>
+        <h3>
+          Перевод
+          <span class="agency-filter-wrap" data-aa-filter-wrap>
+            <span class="agency-filter-main">
+              <button type="button" class="agency-filter-toggle" data-aa-filter-toggle aria-expanded="false" aria-haspopup="listbox">
+                <span class="agency-filter-toggle-label" data-aa-current-filter-label>нейтральный</span>
+                <span class="agency-filter-toggle-caret" aria-hidden="true">▾</span>
+              </button>
+
+              <span class="agency-filter-menu" data-aa-filter-menu hidden role="listbox" aria-label="Фильтр тона">
+                <span class="agency-filter-item">
+                  <button type="button" data-aa-filter-option data-filter-key="neutral" class="agency-filter-option is-active">
+                    <span class="agency-filter-name">Нейтральный</span>
+                    <span class="agency-filter-meter" style="--aa-meter-color:#1ea971; --aa-meter-width:18%;"></span>
+                  </button>
+                  <a class="agency-filter-help" href="{{ .BaseURL }}/irritability-conflict-mechanism/" target="_blank" rel="noopener noreferrer" title="Почему растет раздражительность при внутреннем конфликте" aria-label="Почему растет раздражительность при внутреннем конфликте">?</a>
+                </span>
+
+                <span class="agency-filter-item">
+                  <button type="button" data-aa-filter-option data-filter-key="direct" class="agency-filter-option">
+                    <span class="agency-filter-name">Прямолинейный</span>
+                    <span class="agency-filter-meter" style="--aa-meter-color:#6ccf5a; --aa-meter-width:36%;"></span>
+                  </button>
+                  <a class="agency-filter-help" href="{{ .BaseURL }}/irritability-conflict-mechanism/" target="_blank" rel="noopener noreferrer" title="Почему растет раздражительность при внутреннем конфликте" aria-label="Почему растет раздражительность при внутреннем конфликте">?</a>
+                </span>
+
+                <span class="agency-filter-item">
+                  <button type="button" data-aa-filter-option data-filter-key="radical" class="agency-filter-option">
+                    <span class="agency-filter-name">Радикальный</span>
+                    <span class="agency-filter-meter" style="--aa-meter-color:#f2bf4f; --aa-meter-width:58%;"></span>
+                  </button>
+                  <a class="agency-filter-help" href="{{ .BaseURL }}/irritability-conflict-mechanism/" target="_blank" rel="noopener noreferrer" title="Почему растет раздражительность при внутреннем конфликте" aria-label="Почему растет раздражительность при внутреннем конфликте">?</a>
+                </span>
+
+                <span class="agency-filter-item">
+                  <button type="button" data-aa-filter-option data-filter-key="aggressive" class="agency-filter-option">
+                    <span class="agency-filter-name">Агрессивный</span>
+                    <span class="agency-filter-meter" style="--aa-meter-color:#ea7f35; --aa-meter-width:78%;"></span>
+                  </button>
+                  <a class="agency-filter-help" href="{{ .BaseURL }}/irritability-conflict-mechanism/" target="_blank" rel="noopener noreferrer" title="Почему растет раздражительность при внутреннем конфликте" aria-label="Почему растет раздражительность при внутреннем конфликте">?</a>
+                </span>
+
+                <span class="agency-filter-item">
+                  <button type="button" data-aa-filter-option data-filter-key="toxic" class="agency-filter-option">
+                    <span class="agency-filter-name">Токсичный</span>
+                    <span class="agency-filter-meter" style="--aa-meter-color:#d33a2f; --aa-meter-width:96%;"></span>
+                  </button>
+                  <a class="agency-filter-help" href="{{ .BaseURL }}/irritability-conflict-mechanism/" target="_blank" rel="noopener noreferrer" title="Почему растет раздражительность при внутреннем конфликте" aria-label="Почему растет раздражительность при внутреннем конфликте">?</a>
+                </span>
+              </span>
+            </span>
+          </span>
+        </h3>
+        <p data-aa-result-text></p>
+        <h3>Разбор агентности</h3>
+        <p data-aa-result-analysis></p>
+      </article>
+
+    </section>
+
+    <p class="agency-error" data-aa-error hidden></p>
+
+    <div class="agency-actions agency-how-wrap">
+      <p class="agency-how-note">
+        Теперь это выбор. Если не знаете, что с ним делать, напишите
+        <a href="https://t.me/cookiespooky" data-aa-creator-link target="_blank" rel="noopener noreferrer">создателю</a>.
+      </p>
+      <div class="agency-actions" data-aa-retry-wrap hidden>
+        <button type="button" class="agency-primary-btn agency-primary-btn-text agency-retry-btn" data-aa-retry hidden>Попробовать еще раз</button>
+      </div>
+      <a class="agency-how-link" href="{{ .BaseURL }}/objective-language-analyzer/" target="_blank" rel="noopener noreferrer">Как это работает?</a>
+    </div>
+
+  </div>
+</section>

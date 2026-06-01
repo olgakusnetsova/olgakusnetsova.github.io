@@ -1,0 +1,54 @@
+<section class="page">
+  <h1>Поиск</h1>
+  <form class="search-form" action="{{ .BaseURL }}/search" method="get" data-search-page-form>
+    <input type="search" name="q" value="{{ .SearchQuery }}" placeholder="Поиск..." minlength="2" data-search-page-input />
+    <button type="submit">Найти</button>
+  </form>
+  <div class="search-results" data-search-page-results>
+    {{- if .SearchItems }}
+    <ul>
+      {{- range .SearchItems }}
+      <li>
+        <a href="{{ $.BaseURL }}{{ .Path }}">{{ .Title }}</a>
+        {{- if .Snippet }}<p class="muted">{{ .Snippet }}</p>{{- end }}
+      </li>
+      {{- end }}
+    </ul>
+    {{- else }}
+    <p class="muted">Введите минимум 2 символа.</p>
+    {{- end }}
+  </div>
+  <noscript>
+    <p class="muted">JavaScript улучшает поиск, но не обязателен.</p>
+  </noscript>
+</section>
+<script>
+  (function() {
+    if (window.__npPersonalSearchPageLoader) return;
+    var loaded = false;
+    function loadSearchPageScript() {
+      if (loaded) return;
+      loaded = true;
+      window.__npPersonalSearchPageLoader = true;
+      var s = document.createElement('script');
+      s.src = '{{ .AssetsBase }}/search-page.js';
+      s.async = true;
+      document.body.appendChild(s);
+    }
+
+    var form = document.querySelector('[data-search-page-form]');
+    var input = document.querySelector('[data-search-page-input]');
+
+    if (window.location.search && window.location.search.indexOf('q=') !== -1) {
+      loadSearchPageScript();
+      return;
+    }
+
+    if (form) {
+      form.addEventListener('submit', loadSearchPageScript, { once: true });
+    }
+    if (input) {
+      input.addEventListener('focus', loadSearchPageScript, { once: true });
+    }
+  })();
+</script>

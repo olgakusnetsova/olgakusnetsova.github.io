@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  {{- $isHome := eq .Page.Type "home" -}}
+  {{- $pageURL := .Canonical -}}
+  {{- if not $pageURL }}{{- $pageURL = printf "%s/" .BaseURL -}}{{- end -}}
+  {{- $hubSlug := "" -}}
+  {{- if eq .Page.Type "hub" -}}
+    {{- $hubSlug = .Page.Slug -}}
+  {{- else -}}
+    {{- with .FM.hub -}}
+      {{- range . -}}
+        {{- if and (eq $hubSlug "") . -}}
+          {{- $hubSlug = . -}}
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+  {{- $hubTitle := "" -}}
+  {{- $hubURL := "" -}}
+  {{- if ne $hubSlug "" -}}
+    {{- if eq .Page.Type "hub" -}}
+      {{- $hubTitle = .Title -}}
+      {{- $hubURL = $pageURL -}}
+    {{- else -}}
+      {{- $hubTitle = $hubSlug -}}
+      {{- $hubURL = printf "%s/%s" .BaseURL $hubSlug -}}
+      {{- with .Collections.home_hubs.Items -}}
+        {{- range . -}}
+          {{- if eq .Slug $hubSlug -}}
+            {{- $hubTitle = .Title -}}
+            {{- if .Canonical -}}
+              {{- $hubURL = .Canonical -}}
+            {{- else -}}
+              {{- $hubURL = printf "%s%s" $.BaseURL .Path -}}
+            {{- end -}}
+          {{- end -}}
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+  {{- $siteName := "Наблюдения, автоматизация, смысл" -}}
+  {{- $ogImage := printf "%s/assets/notepub.svg" .BaseURL -}}
+  {{- $hasOGImage := false -}}
+  {{- range .Meta.OpenGraph -}}
+    {{- if eq .Key "og:image" -}}
+      {{- $ogImage = .Value -}}
+      {{- $hasOGImage = true -}}
+    {{- end -}}
+  {{- end -}}
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="color-scheme" content="light" />
+  <meta name="theme-color" content="#ffffff" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Nunito+Sans:wght@300;400;600;700&display=swap" onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Nunito+Sans:wght@300;400;600;700&display=swap" /></noscript>
+  <link rel="preload" as="image" href="{{ $ogImage }}" />
+  <link rel="icon" type="image/svg+xml" href="{{ .AssetsBase }}/notepub.svg" />
+  <link rel="stylesheet" href="{{ .AssetsBase }}/styles.css" />
+  {{- if .Page.Description }}
+  <meta name="description" content="{{ .Page.Description }}" />
+  {{- end }}
+  {{- if .Meta.Robots }}
+  <meta name="robots" content="{{ .Meta.Robots }}" />
+  {{- end }}
+  {{- if .Canonical }}
+  <link rel="canonical" href="{{ .Canonical }}" />
+  {{- end }}
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="{{ .Title }}" />
+  {{- if .Page.Description }}
+  <meta name="twitter:description" content="{{ .Page.Description }}" />
+  {{- end }}
+  <meta name="twitter:image" content="{{ $ogImage }}" />
+  {{- range .Meta.OpenGraph }}
+  <meta property="{{ .Key }}" content="{{ .Value }}" />
+  {{- end }}
+  <meta property="og:site_name" content="{{ $siteName }}" />
+  {{- if not $hasOGImage }}
+  <meta property="og:image" content="{{ $ogImage }}" />
+  {{- end }}
+  {{- if .Meta.JSONLD }}
+  <script type="application/ld+json">{{ .Meta.JSONLD }}</script>
+  {{- else }}
+  {{- $isArticle := eq .Page.Type "article" -}}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "{{ .BaseURL }}/#website",
+        "url": "{{ .BaseURL }}/",
+        "name": "{{ $siteName }}",
+        "inLanguage": "ru"
+      },
+      {
+        "@type": "WebPage",
+        "@id": "{{ $pageURL }}#webpage",
+        "url": "{{ $pageURL }}",
+        "name": "{{ .Title }}",
+        "description": "{{ .Page.Description }}",
+        "isPartOf": { "@id": "{{ .BaseURL }}/#website" },
+        "inLanguage": "ru"
+      }
+      {{- if $isArticle -}},
+      {
+        "@type": "BlogPosting",
+        "headline": "{{ .Title }}",
+        "description": "{{ .Page.Description }}",
+        "mainEntityOfPage": { "@id": "{{ $pageURL }}#webpage" },
+        "inLanguage": "ru"
+      }
+      {{- end -}}
+    ]
+  }
+  </script>
+  {{- end }}
+  {{- if not $isHome }}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Главная",
+        "item": "{{ .BaseURL }}/"
+      }{{- if and (ne $hubSlug "") (ne .Page.Type "hub") -}},
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "{{ $hubTitle }}",
+        "item": "{{ $hubURL }}"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "{{ .Title }}",
+        "item": "{{ $pageURL }}"
+      }{{- else -}},
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "{{ .Title }}",
+        "item": "{{ $pageURL }}"
+      }{{- end }}
+    ]
+  }
+  </script>
+  {{- end }}
+  <script>
+    window.__notepubSearchMode = "{{ .SearchMode }}";
+    window.__notepubBaseURL = "{{ .BaseURL }}";
+  </script>
+  <!-- Yandex.Metrika counter -->
+  <script type="text/javascript">
+    (function(m,e,t,r,i,k,a){
+      m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+      m[i].l=1*new Date();
+      for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+      k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a);
+    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=108674124', 'ym');
+
+    ym(108674124, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+  </script>
+  <!-- /Yandex.Metrika counter -->
+  <title>{{ .Title }}</title>
+</head>
+<body>
+  <noscript><div><img src="https://mc.yandex.ru/watch/108674124" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+  {{ template "header.html" . }}
+
+  <aside class="mobile-nav" data-nav-panel aria-hidden="true">
+    <div class="mobile-nav-inner">
+      <div class="mobile-nav-footer">
+        <a class="footer-telegram" href="https://t.me/thefoundersway" target="_blank" rel="noopener" aria-label="Telegram Channel">
+          <img src="{{ .AssetsBase }}/Logo.svg" alt="" width="20" height="20" loading="lazy" decoding="async">
+        </a>
+        <a class="footer-github" href="https://github.com/cookiespooky" target="_blank" rel="noopener" aria-label="GitHub">
+          <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="24" height="24" fill="currentColor" display="inline-block" overflow="visible" style="vertical-align:text-bottom">
+            <path d="M12 1C5.923 1 1 5.923 1 12c0 4.867 3.149 8.979 7.521 10.436.55.096.756-.233.756-.522 0-.262-.013-1.128-.013-2.049-2.764.509-3.479-.674-3.699-1.292-.124-.317-.66-1.293-1.127-1.554-.385-.207-.936-.715-.014-.729.866-.014 1.485.797 1.691 1.128.99 1.663 2.571 1.196 3.204.907.096-.715.385-1.196.701-1.471-2.448-.275-5.005-1.224-5.005-5.432 0-1.196.426-2.186 1.128-2.956-.111-.275-.496-1.402.11-2.915 0 0 .921-.288 3.024 1.128a10.193 10.193 0 0 1 2.75-.371c.936 0 1.871.123 2.75.371 2.104-1.43 3.025-1.128 3.025-1.128.605 1.513.221 2.64.111 2.915.701.77 1.127 1.747 1.127 2.956 0 4.222-2.571 5.157-5.019 5.432.399.344.743 1.004.743 2.035 0 1.471-.014 2.654-.014 3.025 0 .289.206.632.756.522C19.851 20.979 23 16.854 23 12c0-6.077-4.922-11-11-11Z"></path>
+          </svg>
+        </a>
+      </div>
+    </div>
+    <div class="mobile-nav-backdrop" data-nav-close></div>
+  </aside>
+  <main class="container">
+    {{- if not $isHome }}
+    <nav class="breadcrumbs" aria-label="Хлебные крошки">
+      <a href="{{ .BaseURL }}/">Главная</a>
+      {{- if and (ne $hubSlug "") (ne .Page.Type "hub") }}
+      <span class="breadcrumbs-sep" aria-hidden="true">/</span>
+      <a href="{{ $hubURL }}">{{ $hubTitle }}</a>
+      {{- end }}
+      <span class="breadcrumbs-sep" aria-hidden="true">/</span>
+      <span class="breadcrumbs-current" aria-current="page">{{ .Title }}</span>
+    </nav>
+    {{- end }}
+    {{ .Body }}
+  </main>
+  {{ template "footer.html" . }}
+
+  <div class="search-modal" data-search-modal aria-hidden="true">
+    <div class="search-backdrop" data-search-close></div>
+    <div class="search-panel" role="dialog" aria-modal="true" aria-label="Поиск">
+      <form class="search-form" action="{{ .BaseURL }}/search" method="get">
+        <input type="search" name="q" placeholder="Поиск..." minlength="2" data-search-input />
+        <button type="submit">Найти</button>
+      </form>
+      <div class="search-results" data-search-results></div>
+    </div>
+  </div>
+  <script src="{{ .AssetsBase }}/main.js"></script>
+</body>
+</html>
