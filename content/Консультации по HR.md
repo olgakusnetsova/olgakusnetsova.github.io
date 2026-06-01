@@ -4,7 +4,7 @@ title: "Консультации по HR"
 slug: "konsultacii-po-hr"
 description: "Консультации для руководителей по ролям, сотрудникам, функциям и эффективному взаимодействию в команде."
 draft: false
-noindex: false
+noindex: true
 ---
 
 # Консультации по HR

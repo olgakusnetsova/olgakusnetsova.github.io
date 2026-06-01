@@ -6,8 +6,6 @@ description: "Контакты Ольги Кузнецовой"
 draft: false
 noindex: true
 ---
+[Веб-сайт](https://olgakusnetsova.github.io/) • [TG-канал](https://t.me/OlgaKusnetsova) • [Личный Telegram](https://t.me/put_serdca_OlgaKuznetsova)
 
-## Контакты
-
-- Telegram: [@OlgaKusnetsova](https://t.me/OlgaKusnetsova)
-- Канал: [@put_serdca_OlgaKuznetsova](https://t.me/put_serdca_OlgaKuznetsova)
+Сайт сделан из Obsidian с помощью [Notepub](https://cookiespooky.github.io/notepub-hub)
