@@ -4,7 +4,7 @@ title: "README контента"
 slug: "content-readme"
 description: "Служебная заметка о структуре и редакционных принципах контента."
 draft: true
-noindex: true
+noindex: false
 ---
 
 # README
